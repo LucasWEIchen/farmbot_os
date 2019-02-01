@@ -20,45 +20,52 @@ defmodule Farmbot.Target.Bootstrap.Configurator.Router do
   @mac "00:1f:90:db:45:54"
 
   def stub_network_interfaces(), do: [
-    {"wlan0", %{mac_address: @mac}}, 
-    {"eth0", %{mac_address: @mac}}, 
+    {"wlan0", %{mac_address: @mac}},
+    {"eth0", %{mac_address: @mac}},
     # {"usb0", %{mac_address: @mac}}
   ]
   def stub_network_scan(_ifname), do: [
-  %{   
+  %{
     bssid: "00:00:00:00:00:01",
     flags: "[WPA2-EAP-CCMP][ESS]",
     level: -10,
     security: :"WPA-EAP",
     ssid: "ENTERPRISE"
   },
-  %{   
+  %{
     bssid: "00:00:00:00:00:02",
     flags: "[WPA2-PSK-CCMP][ESS]",
     level: -20,
     security: :"WPA-PSK",
     ssid: "WPA"
   },
-  %{   
+  %{
     bssid: "00:00:00:00:00:03",
     flags: "[RSN--CCMP][MESH]",
-    level: -30,
+    level: -40,
     security: :NONE,
     ssid: "MESH"
   },
-  %{   
+  %{
     bssid: "00:00:00:00:00:04",
     flags: "[IBSS]",
-    level: -40,
+    level: -30,
     security: :NONE,
     ssid: "SETUP"
   },
-  %{   
+  %{
     bssid: "00:00:00:00:00:05",
     flags: "[ESS]",
     level: -50,
     security: :NONE,
     ssid: "OPEN"
+  },
+  %{
+    bssid: "00:00:00:00:00:06",
+    flags: "[WPA2-UNKNOWN-CCMP][ESS]",
+    level: -80,
+    security: :"WPA-UNKNOWN",
+    ssid: "UNKNOWN"
   }
 ]
   defmodule MissingField do
@@ -261,6 +268,9 @@ defmodule Farmbot.Target.Bootstrap.Configurator.Router do
 
       %{"firmware_hardware" => "custom"} ->
         update_config_value(:string, "settings", "firmware_hardware", "custom")
+        redir(conn, "/credentials")
+
+      %{"firmware_hardware" => "skip"} ->
         redir(conn, "/credentials")
 
       _ ->
