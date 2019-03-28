@@ -64,6 +64,7 @@ defmodule FarmbotOS.MixProject do
 
       # Target only deps
       {:cors_plug, "~> 2.0", targets: @all_targets},
+      {:plug_cowboy, "~> 2.0", targets: @all_targets},
       {:phoenix_html, "~> 2.12", targets: @all_targets},
       {:nerves_runtime, "~> 0.9", targets: @all_targets},
       {:nerves_network, "~> 0.5", targets: @all_targets},
@@ -76,9 +77,9 @@ defmodule FarmbotOS.MixProject do
       {:nerves_init_gadget, "~> 0.5", targets: @all_targets},
       {:circuits_gpio, "~> 0.1.0", targets: @all_targets},
       {:toolshed, "~> 0.2", targets: @all_targets},
-      {:farmbot_system_rpi3, "1.6.1-farmbot.1", runtime: false, targets: :rpi3},
-      {:farmbot_system_rpi0, "1.6.1-farmbot.1", runtime: false, targets: :rpi0},
-      {:farmbot_system_rpi, "1.6.1-farmbot.1", runtime: false, targets: :rpi}
+      {:farmbot_system_rpi3, "1.6.3-farmbot.0", runtime: false, targets: :rpi3},
+      {:farmbot_system_rpi0, "1.6.3-farmbot.0", runtime: false, targets: :rpi0},
+      {:farmbot_system_rpi, "1.6.3-farmbot.0", runtime: false, targets: :rpi}
     ]
   end
 
